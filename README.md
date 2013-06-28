@@ -1,4 +1,4 @@
 3DImageViewer
 =============
 
-Web-based viewer for XNAT
+Web-based 3D image viewer for XNAT.
