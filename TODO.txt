@@ -1,0 +1,49 @@
+TODO:
+
+GUI menu
+-- add or remove volumes / meshes to menu as added / removed
+-- ask to replace or merge (when appropriate)
+-- options: opacity, thresholding (checkbox and slider), visible (checkbox)
+-- some indication that a folder is empty / inaccessible (invisible?)
+
+Google closure (instead of jquery)
+-- sliders
+-- index box
+-- drag and drop
+-- menu
+
+small remaining problems
+-- loading vol -> vol : scrolling doesn't match right object
+-- rename from ygr to xyz
+-- move from html and css into pure js?
+-- gui menu: don't call onclick method when dragging
+
+misc features
+-- be able to drag and drop a 2D renderer into a new viewer
+-- Sunil's progress bar?
+-- show slice number out of total?
+-- volume thresholding
+
+load files from XNAT!
+
+
+
+
+thinking about the transfer of data (Steve)
+-- slice by slice
+-- begin in middle, work outwards (so something is there)
+-- pre-cache needed data
+-- -- large, hi-res = slow
+-- -- improve user experience
+
+overlays: same patient, is in same space?, ...
+
+drop in mrb files - Ron
+-- http://slicer.kitware.com/midas3
+
+be able to scan a single slice from…
+-- different patients
+-- across time
+
+scan through time, slice is an average of people, certain attribute highlighted (ie white matter hyperintensity)
+-- http://www.mit.edu/~adalca/tipiX/
