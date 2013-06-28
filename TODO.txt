@@ -5,6 +5,7 @@ GUI menu
 -- ask to replace or merge (when appropriate)
 -- options: opacity, thresholding (checkbox and slider), visible (checkbox)
 -- some indication that a folder is empty / inaccessible (invisible?)
+-- update slice sliders on new volume rather than re-init (keep slice numbers the same from vol to vol - check for OOB)
 
 Google closure (instead of jquery)
 -- sliders
@@ -18,6 +19,7 @@ small remaining problems
 -- move from html and css into pure js?
 -- gui menu: don't call onclick method when dragging
 -- how much overhead is associated with having all objects in the renderer, but invisible vs being added/removed?
+-- dropping file into viewer: add to end of list in menu, not beginning
 
 misc features
 -- be able to drag and drop a 2D renderer into a new viewer
