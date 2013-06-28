@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>testing js and xtk</title>
+    
+    <link type="text/css" rel="stylesheet" href="./scripts/viewer.css"></link>
+    
+    <script type="text/javascript" src="./scripts/jquery/jquery.js"></script>
+    <script type="text/javascript" src="./scripts/jquery/jquery.ui.js"></script>
+    
+	<script type="text/javascript" src="./scripts/X/lib/google-closure-library/closure/goog/base.js"></script>
+	<script type="text/javascript" src="./scripts/X/xtk-deps.js"></script>
+    
+	<script type="text/javascript" src="./scripts/fileHandling.js"></script>
+	<script type="text/javascript" src="./scripts/viewer.js"></script>
+	<script type="text/javascript" src="./scripts/dragAndDrop.js"></script>
+	<script type="text/javascript" src="./scripts/rendering.js"></script>
+	<script type="text/javascript" src="./scripts/sliders.js"></script>
+	
+	<script>$(initDragAndDrop);</script>
+</head>
+<body id = 'body' class = 'portrait'>
+	<div id = 'fileDiv'>
+		<p><b>drag a file into the viewer</b></p>
+        <p>volumes:</p>
+		<p><img class='placeholder'
+				src='../images/holder_nrrd.png'
+				data-file='../data/MRHead.nrrd' /></p>
+		<p><img class='placeholder'
+				src='../images/holder_nii.png'
+				data-file='../data/danielstest.nii' /></p>
+		<!--p><img class='placeholder'
+				src='../images/holder_niigz.png'
+				data-file='../data/gfa.nii.gz' /></p>
+		<p><img class='placeholder'
+				src='../images/holder_mgh.png'
+				data-file='../data/smallvolume.mgh' /></p>
+		<p><img class='placeholder'
+				src='../images/holder_mgz.png'
+				data-file='../data/smallvolume.mgz' /></p-->
+        <p>meshes:</p>
+		<p><img class='placeholder'
+				src='../images/holder_smoothwm.png'
+				data-file='http://x.babymri.org/?lefthemisphere.smoothwm' /></p>
+		<p><img class='placeholder'
+				src='../images/holder_stl.png'
+				data-file='http://x.babymri.org/?porsche.stl' /></p>
+		<p><img class='placeholder'
+				src='../images/holder_vtk.png'
+				data-file='http://x.babymri.org/?pits.vtk' /></p>
+        <p>fibers:</p>
+		<p><img class='placeholder'
+				src='../images/holder_trk.png'
+				data-file='http://x.babymri.org/?cctracks.trk' /></p>
+	</div>
+	<div class = 'canDrop' id = 'viewDiv'></div>
+</body>
+
+</html>

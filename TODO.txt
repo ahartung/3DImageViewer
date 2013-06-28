@@ -1,4 +1,4 @@
-TODO:
+﻿TODO:
 
 GUI menu
 -- add or remove volumes / meshes to menu as added / removed
@@ -17,6 +17,7 @@ small remaining problems
 -- rename from ygr to xyz
 -- move from html and css into pure js?
 -- gui menu: don't call onclick method when dragging
+-- how much overhead is associated with having all objects in the renderer, but invisible vs being added/removed?
 
 misc features
 -- be able to drag and drop a 2D renderer into a new viewer

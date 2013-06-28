@@ -1,0 +1,160 @@
+
+body {
+    font-family: Arial;
+    font-size: 8pt;
+}
+
+/** viewer elements **/
+
+#fileDiv {
+	border: 5px solid black;
+    border-radius: 5px;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 15%;
+    height: 80%;
+    text-align: center;
+    overflow: auto;
+    background: black;
+    color: white;
+}
+
+#viewDiv {
+    position: absolute;
+    border: 5px solid #000;
+    border-radius: 5px;
+    background: #000;
+    top: 10%;
+    left: 30%;
+    height: 80%;
+    width: 60%;
+}
+
+#viewDiv.hovered {
+	background: #333;
+}
+
+.threeD {
+    position: absolute;
+    overflow: hidden;
+    display: inline;
+    
+    width: 100%;
+    height: 66%;
+}
+
+.twoD {
+	border: 1px solid #333;
+    position: absolute;
+    width: 33.3%;
+    height: 33.3%;
+    overflow: hidden;
+    display: inline;
+}
+
+
+/** portrait **/
+
+#body.portrait #viewDiv #vDiv {
+	width: 100%;
+	height: 66.6%;
+}
+
+#body.portrait #viewDiv #xDiv {
+	top: 66.6%;
+}
+
+#body.portrait #viewDiv #yDiv {
+	top: 66.6%;
+	left: 33.3%;
+}
+
+#body.portrait #viewDiv #zDiv {
+	top: 66.6%;
+	left: 66.6%;
+}
+
+
+/** landscape ** /
+
+#body.landscape #viewDiv #vDiv {
+	width: 66.6%;
+	height: 100%;
+}
+
+#body.landscape #viewDiv #xDiv {
+	left: 66.6%;
+}
+
+#body.landscape #viewDiv #yDiv {
+	top: 33.3%;
+	left: 66.6%;
+}
+
+#body.landscape #viewDiv #zDiv {
+	top: 66.6%;
+	left: 66.6%;
+}
+*/
+
+/** index input box **/
+
+.indexBox {
+    position: absolute;
+    padding-right: 2px;
+    right: 6px;
+    bottom: 6px;
+    width: 22px;
+    height: 16px;
+    background: #222;
+    font-size: 12px;
+    border: 1px solid;
+    color: #888;
+    text-align: right;
+}
+
+.maxIndex {
+    position: absolute;
+    right: 6px;
+    bottom: 8px;
+    width: 22px;
+    height: 16px;
+    font-family: Arial;
+    font-size: 12px;
+    color: #888;
+    text-align: right;
+}
+
+#xIndexBox { border-color: #CC0; }
+#yIndexBox { border-color: #0f0; }
+#zIndexBox { border-color: #f00; }
+
+
+/** 2D slice sliders **/
+
+.slice.ui-slider {
+	position: absolute;
+	left: 5%;
+	top: 10px;
+	width: 90%;
+	height: 8px;
+    border-radius: 4px;
+}
+
+.slice .ui-slider-handle {
+	position: absolute;
+	top: -5px;
+	margin-left: -4px;
+	width: 8px;
+	height: 18px;
+	background: #888;
+    border-radius: 4px;
+}
+
+#xSlider { background: #CC0; }
+#ySlider { background: #0f0; }
+#zSlider { background: #f00; }
+
+
+
