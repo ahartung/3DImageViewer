@@ -1,33 +1,40 @@
 ﻿TODO:
 
-GUI menu
--- add or remove volumes / meshes to menu as added / removed
--- ask to replace or merge (when appropriate)
--- options: opacity, thresholding (checkbox and slider), visible (checkbox)
--- some indication that a folder is empty / inaccessible (invisible?)
--- update slice sliders on new volume rather than re-init (keep slice numbers the same from vol to vol - check for OOB)
+dimensions of files are inconsistent w/ xtk
+some nrrd files: x = dim[2], y = dim[1], z = dim[0]
+other nrrd files: x = dim[0], y = dim[1], z = dim[2]
+other nrrd files: x = dim[2], y = dim[0], z = dim[1]
 
 Google closure (instead of jquery)
 -- sliders
 -- index box
 -- drag and drop
 -- menu
+-- -- zippy (https://developers.google.com/closure/library/docs/tutorial)
 
 small remaining problems
 -- loading vol -> vol : scrolling doesn't match right object
--- rename from ygr to xyz
--- move from html and css into pure js?
 -- gui menu: don't call onclick method when dragging
--- how much overhead is associated with having all objects in the renderer, but invisible vs being added/removed?
--- dropping file into viewer: add to end of list in menu, not beginning
+-- load vol, load mesh, vol opacity to 0, mesh is visible, render, opacity to 0, hard to see mesh
 
 misc features
--- be able to drag and drop a 2D renderer into a new viewer
+-- make range of threshold slider different color
+-- move from html and css into pure js?
+-- be able to drag and drop a 2D renderer into a new viewer?
 -- Sunil's progress bar?
 -- show slice number out of total?
--- volume thresholding
+-- be able to change size of 2D planes?
+
+future problems
+-- prompt to replace or merge (ie dropped different patient data, replace?)
+-- add meshes / volumes to same space (same orientation, same origin, same scale)
+-- adding multiple objects at once messes with 2D renderers
+-- how much overhead is associated with having all objects in the renderer, but invisible vs being added/removed?
+
 
 load files from XNAT!
+
+
 
 
 

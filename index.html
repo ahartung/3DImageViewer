@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <title>testing js and xtk</title>
     
-    <link type="text/css" rel="stylesheet" href="./scripts/viewer.css"></link>
+    <link type="text/css" rel="stylesheet" href="scripts/viewer.css"></link>
+    <link type="text/css" rel="stylesheet" href="scripts/menu/menu.css"></link>
     
     <script type="text/javascript" src="./scripts/jquery/jquery.js"></script>
     <script type="text/javascript" src="./scripts/jquery/jquery.ui.js"></script>
@@ -18,7 +19,15 @@
 	<script type="text/javascript" src="./scripts/viewer.js"></script>
 	<script type="text/javascript" src="./scripts/dragAndDrop.js"></script>
 	<script type="text/javascript" src="./scripts/rendering.js"></script>
-	<script type="text/javascript" src="./scripts/sliders.js"></script>
+	<script type="text/javascript" src="./scripts/sliceSliders.js"></script>
+    
+    <script type="text/javascript" src="./scripts/menu/initMenu.js"></script>
+    <script type="text/javascript" src="./scripts/menu/addToMenu.js"></script>
+    <script type="text/javascript" src="./scripts/menu/addToFolder.js"></script>
+    <script type="text/javascript" src="./scripts/menu/volumes/opacity.js"></script>
+    <script type="text/javascript" src="./scripts/menu/volumes/rendering.js"></script>
+    <script type="text/javascript" src="./scripts/menu/volumes/threshold.js"></script>
+    <script type="text/javascript" src="./scripts/menu/volumes/visibility.js"></script>
 	
 	<script>$(initDragAndDrop);</script>
 </head>
@@ -27,33 +36,33 @@
 		<p><b>drag a file into the viewer</b></p>
         <p>volumes:</p>
 		<p><img class='placeholder'
-				src='./images/holder_nrrd.png'
-				data-file='./data/MRHead.nrrd' /></p>
+				src='images/holder_nrrd.png'
+				data-file='data/MRHead.nrrd' /></p>
 		<p><img class='placeholder'
-				src='./images/holder_nii.png'
-				data-file='./data/danielstest.nii' /></p>
+				src='images/holder_nii.png'
+				data-file='data/danielstestreallylongfilename.nii' /></p>
 		<!--p><img class='placeholder'
-				src='./images/holder_niigz.png'
-				data-file='./data/gfa.nii.gz' /></p>
+				src='images/holder_niigz.png'
+				data-file='data/gfa.nii.gz' /></p>
 		<p><img class='placeholder'
-				src='./images/holder_mgh.png'
-				data-file='./data/smallvolume.mgh' /></p>
+				src='images/holder_mgh.png'
+				data-file='data/smallvolume.mgh' /></p>
 		<p><img class='placeholder'
-				src='./images/holder_mgz.png'
-				data-file='./data/smallvolume.mgz' /></p-->
+				src='images/holder_mgz.png'
+				data-file='data/smallvolume.mgz' /></p-->
         <p>meshes:</p>
 		<p><img class='placeholder'
-				src='./images/holder_smoothwm.png'
+				src='images/holder_smoothwm.png'
 				data-file='http://x.babymri.org/?lefthemisphere.smoothwm' /></p>
 		<p><img class='placeholder'
-				src='./images/holder_stl.png'
+				src='images/holder_stl.png'
 				data-file='http://x.babymri.org/?porsche.stl' /></p>
 		<p><img class='placeholder'
-				src='./images/holder_vtk.png'
+				src='images/holder_vtk.png'
 				data-file='http://x.babymri.org/?pits.vtk' /></p>
         <p>fibers:</p>
 		<p><img class='placeholder'
-				src='./images/holder_trk.png'
+				src='images/holder_trk.png'
 				data-file='http://x.babymri.org/?cctracks.trk' /></p>
 	</div>
 	<div class = 'canDrop' id = 'viewDiv'></div>

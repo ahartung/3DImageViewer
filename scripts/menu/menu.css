@@ -1,0 +1,102 @@
+/** GUI toggle menu **/
+
+/** Folders and headers **/
+
+#menuDiv {
+    position: absolute;
+    border: 5px solid #fff;
+    border-radius: 5px;
+    background: #fff;
+    top: 10px;
+    right: 10px;
+    width: 200px;
+    opacity: 0.6;
+}
+
+#mHeader {
+    text-align: center;
+    font-size: 9pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 3px solid #333;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.folder {
+    margin-top: 15px;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+    background: #aaa;
+    cursor: pointer;
+}
+
+.ui-icon {
+    width: 16px;
+    height: 12px;
+    background-image: url(http://code.jquery.com/ui/1.9.1/themes/base/images/ui-icons_454545_256x240.png);
+}
+
+.ui-icon-triangle-1-e { background-position: -32px -16px; }
+.ui-icon-triangle-1-s { background-position: -64px -16px; }
+
+/** Inner content of folders **/
+
+.wrapper {
+    position: relative;
+    height: 8px;
+}
+
+.outerFileDiv {
+    position: relative;
+}
+
+.innerFileDiv {
+    position: absolute;
+    top: 3px;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.volumeFile .innerFileDiv { width: 85%; }
+.meshFile .innerFileDiv, .fiberFile .innerFileDiv { width: 45%; }
+
+.label {
+    text-align: right;
+    text-transform: uppercase;
+    margin-top: 8px;
+    letter-spacing: 2px;
+}
+
+/** sliders **/
+
+.ui-slider {
+    position: absolute;
+    width: 94%;
+    left: 3%;
+    height: 6px;
+    border-radius: 3px;
+    background: #555;
+    display: inline-block;
+}
+
+.ui-slider-handle {
+    position: absolute;
+    margin-top: -4px;
+    margin-left: -4px;
+	width: 6px;
+	height: 12px;
+	background: #eee;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+.opacityNonvol.ui-slider {
+    top: 7px;
+    width: 38%;
+    left: 58%;
+}
+

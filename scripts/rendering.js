@@ -5,6 +5,8 @@ goog.require('X.volume');
 goog.require('X.mesh');
 goog.require('X.fibers');
 
+var firstVolObj = true;
+
 var threeDrenderer;
 var twoDrendererX;
 var twoDrendererY;
@@ -15,14 +17,14 @@ var twoDrendererZ;
  * @param {string} file File name or path
  * @return {Object} X object
  */
-function createObject(file) {
+function createXObject(file) {
 	var ext = getFileExt(file);
     obj = getXTKObjName(ext);
     
     // associate file 
     if (ext == "dcm" || ext == "dicom") {
         var dicomFiles = [];
-        var numFiles = 160;     // TODO: read this in at some point
+        var numFiles = 160;     // TODO read this in at some point
         for (var i=1; i <= numFiles; ++i) {
             dicomFiles.push(i);
         }
@@ -82,14 +84,13 @@ function create2D(xID, yID, zID) {
  * @return {undefined}
  */
 function createRenderers(object, vID, xID, yID, zID) {
-    var viewport = goog.dom.getElement('viewDiv');
     
     // add in the elements for the renderers
     var v = goog.dom.createDom('div', { 'id': vID, 'class': 'threeD'});
     var x = goog.dom.createDom('div', { 'id': xID, 'class': 'twoD' });
     var y = goog.dom.createDom('div', { 'id': yID, 'class': 'twoD' });
     var z = goog.dom.createDom('div', { 'id': zID, 'class': 'twoD' });
-    goog.dom.append(viewport, [v, x, y, z]);
+    goog.dom.append(goog.dom.getElement('viewDiv'), [v, x, y, z]);
     
     // add in the elements for the sliders and index boxes
     goog.dom.append(x, [goog.dom.createDom('div', { 'id': 'xSlider', 'class': 'slice' }),
@@ -101,7 +102,6 @@ function createRenderers(object, vID, xID, yID, zID) {
     
     create3D(vID);
     create2D(xID, yID, zID);
-    threeDrenderer.add(object);
     threeDrenderer.render();
 };
 
@@ -125,23 +125,41 @@ function destroyRenderers() {
  * @param {boolean} show2D True if we want to show 2D renderers
  * @return {undefined}
  */
-function setOnShowtime(object, show2D) {
+function setOnShowtime3D(object, show2D) {
     if (show2D) {
         threeDrenderer.onShowtime = function() {
-            twoDrendererY.add(object);
-            twoDrendererY.render();
+            update2Drenderers(object);
+            if (firstVolObj) {
+                setupVolumeOptions();
+                firstVolObj = false;
+            }
+            initVolOpacitySlider();
+            initThreshSlider();
             
-            twoDrendererZ.add(object);
-            twoDrendererZ.render();
-            
-            twoDrendererX.add(object);
-            twoDrendererX.render();
-            
-            initSliceSliders(object);
         };
     } else {
         threeDrenderer.onShowtime = function() { };
     }
+}
+
+/**
+ * Adds the provided object to each of the 2D renderers and renders. Calls
+ * the slice slider init function to re-init sliders and index boxes for new object.
+ * @param {Object} X object to be added
+ * @return {undefined}
+ */
+function update2Drenderers(object) {
+    twoDrendererX.add(object);
+    twoDrendererX.render();
+    
+    twoDrendererY.add(object);
+    twoDrendererY.render();
+    
+    twoDrendererZ.add(object);
+    twoDrendererZ.render();
+    
+    initSliceSliders();
+//    object.modified;
 }
 
 //goog.dom.getElement('buttonX').onclick = function() { }

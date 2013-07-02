@@ -1,11 +1,14 @@
 
+goog.require('goog.ui.Component');
+goog.require('goog.ui.Slider');
+
 /**
  * Set properties and starting values of x/y/zSliders and x/y/zIndexBoxes.
  * Only called once *volume* has loaded.
  * @param {Object} obj X object sliders will control
  * @return {undefined}
  */
-function initSliceSliders(obj) {
+function initSliceSliders() {
     $("#xSlider, #ySlider, #zSlider").slider({
 		orientation: "horizontal",
 		min: 0,
@@ -19,9 +22,9 @@ function initSliceSliders(obj) {
     });
     
     // set slider maximums for each plane
-    $('#xSlider').slider('option', 'max', obj.dimensions[2]-1);
-    $('#ySlider').slider('option', 'max', obj.dimensions[1]-1);
-    $('#zSlider').slider('option', 'max', obj.dimensions[0]-1);
+    $('#xSlider').slider('option', 'max', currentVolObject.dimensions[2]-1);
+    $('#ySlider').slider('option', 'max', currentVolObject.dimensions[1]-1);
+    $('#zSlider').slider('option', 'max', currentVolObject.dimensions[0]-1);
     
     // midpoints of each plane ...
     var xHalf = ~~($('#xSlider').slider('option', 'max')/2);
@@ -44,14 +47,49 @@ function initSliceSliders(obj) {
     twoDrendererZ.onScroll = updateZonScroll;
 }
 
+/*
+// undesirable -- hard to compare volumes by switching back and forth.
+// index via percentage may work better
+function updateSliceSliders() {
+    // keep indices the same as last (unless they are out of bounds)
+    var xmax = currentVolObject.dimensions[2]-1;
+    var ymax = currentVolObject.dimensions[1]-1;
+    var zmax = currentVolObject.dimensions[0]-1;
+    
+    if ($('#xSlider').slider('option', 'max') > xmax) {
+        $('#xSlider').slider('option', 'max', xmax);
+        $('#xSlider').slider('option', 'value', xmax);
+        $('#xIndexBox').val(xmax);
+    } else {
+        $('#xSlider').slider('option', 'value', currentVolObject.sliceX);
+    }
+    
+    if ($('#ySlider').slider('option', 'max') > ymax) {
+        $('#ySlider').slider('option', 'max', ymax);
+        $('#ySlider').slider('option', 'value', ymax);
+        $('#yIndexBox').val(ymax);
+    } else {
+        $('#ySlider').slider('option', 'value', currentVolObject.sliceY);
+    }
+    
+    if ($('#zSlider').slider('option', 'max') > zmax) {
+        $('#zSlider').slider('option', 'max', zmax);
+        $('#zSlider').slider('option', 'value', zmax);
+        $('#zIndexBox').val(zmax);
+    } else {
+        $('zSlider').slider('option', 'value', currentVolObject.sliceZ);
+    }
+    
+}
+*/
 /**
  * Updates X slider value and displayed X index on scrolling.
  * @param {undefined}
  * @return {undefined}
  */
 var updateXonScroll = function() {
-    $('#xSlider').slider('option', 'value', currentObject._indexX);
-    $('#xIndexBox').val(currentObject._indexX);
+    $('#xSlider').slider('option', 'value', currentVolObject.indexX);
+    $('#xIndexBox').val(currentVolObject.indexX);
 };
 
 /**
@@ -60,8 +98,8 @@ var updateXonScroll = function() {
  * @return {undefined}
  */
 var updateYonScroll = function() {
-    $('#ySlider').slider('option', 'value', currentObject._indexY);
-    $('#yIndexBox').val(currentObject._indexY);
+    $('#ySlider').slider('option', 'value', currentVolObject.indexY);
+    $('#yIndexBox').val(currentVolObject.indexY);
 };
 
 /**
@@ -70,8 +108,8 @@ var updateYonScroll = function() {
  * @return {undefined}
  */
 var updateZonScroll = function() {
-    $('#zSlider').slider('option', 'value', currentObject._indexZ);
-    $('#zIndexBox').val(currentObject._indexZ);
+    $('#zSlider').slider('option', 'value', currentVolObject.indexZ);
+    $('#zIndexBox').val(currentVolObject.indexZ);
 };
 
 /**
@@ -81,18 +119,18 @@ var updateZonScroll = function() {
  * @param {Object} ui Slider object
  * @return {undefined}
  */
-// TODO: only update the one plane that needs to be updated
+// TODO: only update the one plane that needs to be updated (ui.value)
 function updateOnSlide(event, ui) {
     // update volume's current indices
-	currentObject._indexX = $('#xSlider').slider('value');
-	currentObject._indexY = $('#ySlider').slider('value');
-	currentObject._indexZ = $('#zSlider').slider('value');
-    currentObject.modified();
+	currentVolObject.indexX = $('#xSlider').slider('value');
+	currentVolObject.indexY = $('#ySlider').slider('value');
+	currentVolObject.indexZ = $('#zSlider').slider('value');
+    currentVolObject.modified();
     
     // update index box's current indices
-    $('#xIndexBox').val(currentObject._indexX);
-    $('#yIndexBox').val(currentObject._indexY);
-    $('#zIndexBox').val(currentObject._indexZ);
+    $('#xIndexBox').val(currentVolObject.indexX);
+    $('#yIndexBox').val(currentVolObject.indexY);
+    $('#zIndexBox').val(currentVolObject.indexZ);
 }
 
 /**
@@ -104,15 +142,15 @@ function updateOnSlide(event, ui) {
  */
 function gotoIndex(id) {
 	if (! threeDrenderer) { window.alert('You must select a volume first!'); return; }
-    if (! currentObject) { window.alert('volume must be loaded'); return; }
+    if (! currentVolObject) { window.alert('volume must be loaded'); return; }
     
 	var l = 0;
     var h;
     
     id = '#' + id[0];
-    if (id == '#x') { h = currentObject.dimensions[2]; }
-    if (id == '#y') { h = currentObject.dimensions[1]; }
-    if (id == '#z') { h = currentObject.dimensions[0]; }
+    if (id == '#x') { h = currentVolObject.dimensions[2]; }
+    if (id == '#y') { h = currentVolObject.dimensions[1]; }
+    if (id == '#z') { h = currentVolObject.dimensions[0]; }
     
     var sliceNum = $(id + 'IndexBox').val();
     
@@ -121,10 +159,10 @@ function gotoIndex(id) {
         $(id + 'IndexBox').val( $(id + 'Slider').slider('value') );
     } else {
         // update volume's current indices
-        if (id == '#x') { currentObject._indexX = sliceNum; }
-        if (id == '#y') { currentObject._indexY = sliceNum; }
-        if (id == '#z') { currentObject._indexZ = sliceNum; }
-        currentObject.modified();
+        if (id == '#x') { currentVolObject.indexX = sliceNum; }
+        if (id == '#y') { currentVolObject.indexY = sliceNum; }
+        if (id == '#z') { currentVolObject.indexZ = sliceNum; }
+        currentVolObject.modified();
         
         // update slider's value
         $(id + 'Slider').slider('option', 'value', sliceNum); 

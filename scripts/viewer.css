@@ -133,7 +133,7 @@ body {
 
 /** 2D slice sliders **/
 
-.slice.ui-slider {
+.slice.ui-slider, .slice.goog-slider {
 	position: absolute;
 	left: 5%;
 	top: 10px;
@@ -142,13 +142,15 @@ body {
     border-radius: 4px;
 }
 
-.slice .ui-slider-handle {
+.slice .ui-slider-handle,
+.slice .goog-slider-thumb {
 	position: absolute;
-	top: -5px;
+    margin-top: -5px;
 	margin-left: -4px;
 	width: 8px;
 	height: 18px;
 	background: #888;
+    border: 0px;
     border-radius: 4px;
 }
 
