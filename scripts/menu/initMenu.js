@@ -1,5 +1,7 @@
 
 goog.require('goog.ui.Zippy');
+goog.require('goog.ui.AnimatedZippy');
+goog.require('goog.fx.Dragger');
 
 var menuContent;
 var voluContent;
@@ -18,7 +20,7 @@ function initMenu() {
     
     // create primary header and content
     var mHeader = goog.dom.createDom('div', {
-        'id': 'mHeader',
+        'id': 'menuHeader',
         'class': 'collapsibleHeader',
         'innerHTML': 'hide menu' });
     menuContent = goog.dom.createDom('div', {
@@ -31,9 +33,12 @@ function initMenu() {
     fibrContent = addFolderToMenu('fibers');
     
     // be able to move menu around viewer
-    $('#menuDiv').draggable({
+    /*$('#menuDiv').draggable({
         containment: 'parent'
-    })
+    })*/
+    // TODO: set limits
+    var mDrag = new goog.fx.Dragger(goog.dom.getElement('menuDiv'));
+    mDrag.setHysteresis(5);
 }
 
 /**
@@ -44,14 +49,15 @@ function initMenu() {
  */
 function initCollapsible() {
     // all headers cause collapse
-    $('.collapsibleHeader').click( function() {
-        $($(this).children()[0]).toggleClass('ui-icon-triangle-1-e ui-icon-triangle-1-s');
-        $(this).next('.collapsibleContent').slideToggle('medium');
-    });
-    
+    var mZippy = new goog.ui.AnimatedZippy('menuHeader', 'menuContent', true);
+    var vZippy = new goog.ui.AnimatedZippy('volumesHeader', 'volumesContent', true);
+    var mZippy = new goog.ui.AnimatedZippy('meshesHeader', 'meshesContent', true);
+    var fZippy = new goog.ui.AnimatedZippy('fibersHeader', 'fibersContent', true);
+
     // for whole menu toggle only: change text from show / hide
-    $('#mHeader').click( function() {
-        this.innerHTML = (this.innerHTML == 'show menu') ? 'hide menu' : 'show menu';
+    goog.events.listen(goog.dom.getElement('menuHeader'), 'click', function(event) {
+        event.target.innerHTML =
+            (event.target.innerHTML == 'show menu') ? 'hide menu' : 'show menu';
     });
 }
 

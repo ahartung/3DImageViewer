@@ -1,35 +1,65 @@
 
+goog.require('goog.fx.DragDrop');
+goog.require('goog.fx.DragDropGroup');
+
 // http://jsfiddle.net/QpAcf/
 
+  /*
+  // !!! doesn't get execute when dragging! menu thing
+  goog.events.listen(document.getElementById('drophere'), 'click',
+                     function(e) { alert('click'); });
+                     */
+  //event.stopPropagation();
+
 /**
- * Sets file placeholders to be draggable and the large viewer to be droppable.
+ * Sets file placeholders to be draggable and droppable into the large viewer.
  * @param {undefined}
  * @return {undefined}
  */
-function initDragAndDrop() {    
-    $('.placeholder').draggable({
-    	containment: 'document',
-    	scroll: false,
-		appendTo: 'body',
-		helper: 'clone',
-    });
+function initDragAndDrop() {
+    var viewer = new goog.fx.DragDrop('viewDiv', 'viewer');
+    var images = new goog.fx.DragDropGroup();
     
-    $('.canDrop').droppable({
-    	hoverClass: 'hovered',
-        accept: '.placeholder',
-    	drop: loadFileOnDrop,
-    });
+    var nodes = goog.dom.getElement('fileDiv').childNodes;
+    var len = nodes.length;
+    for (i = 0; i < len; i++) {
+        el = nodes[i];
+        if ((el.nodeType == 1) && (el.firstChild.nodeName == 'IMG')) {
+            images.addItem(el, el.firstChild.getAttribute('data-file'));
+        }
+    }
+    
+    images.addTarget(viewer);
+    images.setSourceClass('source');
+    images.setTargetClass('target');
+    viewer.setSourceClass('source');
+    viewer.setTargetClass('target');
+    images.init();
+    viewer.init();
+    
+    goog.events.listen(images, 'dragstart', dragStart);
+    goog.events.listen(images, 'dragend', dragEnd);
+    
+    goog.events.listen(viewer, 'dragover', dragOver);
+    goog.events.listen(viewer, 'dragout', dragOut);
+    goog.events.listen(viewer, 'drop', loadFileOnDrop);
 }
+
+function dragOver(event) { goog.style.setOpacity(event.dropTargetItem.element, 0.75); }
+function dragOut(event) { goog.style.setOpacity(event.dropTargetItem.element, 1.0); }
+function dragStart(event) { goog.style.setOpacity(event.dragSourceItem.element, 0.75); }
+function dragEnd(event) { goog.style.setOpacity(event.dragSourceItem.element, 1.0); }
 
 /**
  * Handles a dropped file: Creates renderers and toggle menu if none exist.
  * Always adds new object. Toggles visibility of volumes if necessary.
  * @param {Event} event	Drop event
- * @param {Object} ui Dropped object
  * @return {undefined}
  */
-function loadFileOnDrop(event, ui) {
-	var file = ui.draggable.attr('data-file');
+function loadFileOnDrop(event) {
+    goog.style.setOpacity(event.dropTargetItem.element, 1.0);
+    
+	var file = event.dragSourceItem.data;
     var filetype = getFileObjectType(file);
     
     // check to see if object has already been created and rendered...

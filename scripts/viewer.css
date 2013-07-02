@@ -31,10 +31,6 @@ body {
     width: 60%;
 }
 
-#viewDiv.hovered {
-	background: #333;
-}
-
 .threeD {
     position: absolute;
     overflow: hidden;
@@ -133,20 +129,19 @@ body {
 
 /** 2D slice sliders **/
 
-.slice.ui-slider, .slice.goog-slider {
+.slice.goog-slider-horizontal {
 	position: absolute;
 	left: 5%;
 	top: 10px;
 	width: 90%;
 	height: 8px;
     border-radius: 4px;
+    background: #4AA;
 }
 
-.slice .ui-slider-handle,
 .slice .goog-slider-thumb {
 	position: absolute;
     margin-top: -5px;
-	margin-left: -4px;
 	width: 8px;
 	height: 18px;
 	background: #888;

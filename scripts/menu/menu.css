@@ -13,7 +13,7 @@
     opacity: 0.6;
 }
 
-#mHeader {
+#menuHeader {
     text-align: center;
     font-size: 9pt;
     text-transform: uppercase;
@@ -31,14 +31,14 @@
     cursor: pointer;
 }
 
-.ui-icon {
+.goog-zippy-expanded .arrow, .goog-zippy-collapsed .arrow {
     width: 16px;
     height: 12px;
     background-image: url(http://code.jquery.com/ui/1.9.1/themes/base/images/ui-icons_454545_256x240.png);
 }
 
-.ui-icon-triangle-1-e { background-position: -32px -16px; }
-.ui-icon-triangle-1-s { background-position: -64px -16px; }
+.goog-zippy-expanded .arrow { background-position: -64px -16px; }
+.goog-zippy-collapsed .arrow { background-position: -32px -16px; }
 
 /** Inner content of folders **/
 
@@ -73,6 +73,7 @@
 
 /** sliders **/
 
+.goog-slider-horizontal,
 .ui-slider {
     position: absolute;
     width: 94%;
