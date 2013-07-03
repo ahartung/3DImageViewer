@@ -8,7 +8,6 @@ other nrrd files: x = dim[2], y = dim[0], z = dim[1]
 Google closure (instead of jquery)
 -- sliders (opacities, theshold)
 -- -- don't want it to drag menu around... stop propagation
--- index box (TODO: doesn't recognize change..?)
 -- radio buttons
 -- checkboxes
 -- all listeners
@@ -19,6 +18,7 @@ small remaining problems
 -- load vol, load mesh, vol opacity to 0, mesh is visible, render, opacity to 0, hard to see mesh
 -- give the menu boundaries: don't drag out of viewer
 -- animated zippy makes an extra div elt
+-- shift and move mouse: doesn't update sliders or boxes
 
 misc features
 -- make range of threshold slider different color

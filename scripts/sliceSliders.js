@@ -20,6 +20,8 @@ function initSliceSliders() {
     createSliders();
     createIndexBoxes();
     
+    updateSlices();
+    
     addSliderListeners();
     addIndexBoxListeners();
     addScrollListeners();
@@ -33,14 +35,6 @@ function createSliders() {
     xSlider.decorate(goog.dom.getElement('xSlider'));
     ySlider.decorate(goog.dom.getElement('ySlider'));
     zSlider.decorate(goog.dom.getElement('zSlider'));
-    
-    xSlider.setMaximum(currentVolObject.dimensions[2]-1);
-    ySlider.setMaximum(currentVolObject.dimensions[1]-1);
-    zSlider.setMaximum(currentVolObject.dimensions[0]-1);
-    
-    xSlider.setValue(~~(currentVolObject.indexX));
-    ySlider.setValue(~~(currentVolObject.indexY));
-    zSlider.setValue(~~(currentVolObject.indexZ));
 }
 
 function createIndexBoxes() {
@@ -51,10 +45,6 @@ function createIndexBoxes() {
     xBox.decorate(goog.dom.getElement('xIndexBox'));
     yBox.decorate(goog.dom.getElement('yIndexBox'));
     zBox.decorate(goog.dom.getElement('zIndexBox'));
-    
-    xBox.setValue(~~(currentVolObject.indexX));
-    yBox.setValue(~~(currentVolObject.indexY));
-    zBox.setValue(~~(currentVolObject.indexZ));
 }
 
 /**
@@ -88,12 +78,10 @@ function addSliderListeners() {
  */
 function addIndexBoxListeners() {
     xBox.getElement().addEventListener(goog.ui.Component.EventType.CHANGE, function() {
-        var sliceNum = xBox.getValue();
-        console.log(sliceNum);
+        var sliceNum = new Number(xBox.getValue());
         if (sliceNum < 0 || sliceNum > currentVolObject.dimensions[2] || isNaN(sliceNum)) {
             xBox.setValue(xSlider.getValue());
         } else {
-            console.log('got here');
             currentVolObject.indexX = sliceNum;
             currentVolObject.modified();
             xSlider.setValue(sliceNum);
@@ -102,19 +90,18 @@ function addIndexBoxListeners() {
     });
     
     yBox.getElement().addEventListener(goog.ui.Component.EventType.CHANGE, function() {
-        var sliceNum = yBox.getValue();
+        var sliceNum = new Number(yBox.getValue());
         if (sliceNum < 0 || sliceNum > currentVolObject.dimensions[1] || isNaN(sliceNum)) {
             yBox.setValue(ySlider.getValue());
         } else {
             currentVolObject.indexY = sliceNum;
             currentVolObject.modified();
             ySlider.setValue(sliceNum);
-            
         }
     });
     
     zBox.getElement().addEventListener(goog.ui.Component.EventType.CHANGE, function() {
-        var sliceNum = zBox.getValue();
+        var sliceNum = new Number(zBox.getValue());
         if (sliceNum < 0 || sliceNum > currentVolObject.dimensions[0] || isNaN(sliceNum)) {
             zBox.setValue(zSlider.getValue());
         } else {
@@ -128,15 +115,33 @@ function addIndexBoxListeners() {
 function addScrollListeners() {
     // set up reaction functions for scrolling
     twoDrendererX.onScroll = function() {
-        xSlider.setValue(~~(currentVolObject.indexX));
-        xBox.setValue(~~(currentVolObject.indexX));
+        xSlider.setValue(currentVolObject.indexX);
+        xBox.setValue(currentVolObject.indexX);
     };
     twoDrendererY.onScroll = function() {
-        ySlider.setValue(~~(currentVolObject.indexY));
-        yBox.setValue(~~(currentVolObject.indexY));
+        ySlider.setValue(currentVolObject.indexY);
+        yBox.setValue(currentVolObject.indexY);
     };
     twoDrendererZ.onScroll = function() {
-        zSlider.setValue(~~(currentVolObject.indexZ));
-        zBox.setValue(~~(currentVolObject.indexZ));
+        zSlider.setValue(currentVolObject.indexZ);
+        zBox.setValue(currentVolObject.indexZ);
     };
+}
+
+function updateSlices() {
+    currentVolObject.indexX = ~~(currentVolObject.indexX);
+    currentVolObject.indexY = ~~(currentVolObject.indexY);
+    currentVolObject.indexZ = ~~(currentVolObject.indexZ);
+    
+    xSlider.setMaximum(currentVolObject.dimensions[2]-1);
+    ySlider.setMaximum(currentVolObject.dimensions[1]-1);
+    zSlider.setMaximum(currentVolObject.dimensions[0]-1);
+    
+    xSlider.setValue(currentVolObject.indexX);
+    ySlider.setValue(currentVolObject.indexY);
+    zSlider.setValue(currentVolObject.indexZ);
+    
+    xBox.setValue(currentVolObject.indexX);
+    yBox.setValue(currentVolObject.indexY);
+    zBox.setValue(currentVolObject.indexZ);
 }

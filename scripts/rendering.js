@@ -128,11 +128,12 @@ function destroyRenderers() {
 function setOnShowtime3D(object, show2D) {
     if (show2D) {
         threeDrenderer.onShowtime = function() {
-            update2Drenderers(object);
             if (firstVolObj) {
                 setupVolumeOptions();
+                initSliceSliders();
                 firstVolObj = false;
             }
+            update2Drenderers(object);
             initVolOpacitySlider();
             initThreshSlider();
             
@@ -158,7 +159,7 @@ function update2Drenderers(object) {
     twoDrendererZ.add(object);
     twoDrendererZ.render();
     
-    initSliceSliders();
+    updateSlices();
 //    object.modified;
 }
 
