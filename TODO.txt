@@ -12,6 +12,9 @@ Google closure (instead of jquery)
 -- checkboxes
 -- all listeners
 
+-- load files from XNAT
+-- -- REST API
+
 small remaining problems
 -- loading vol -> vol : scrolling doesn't match right object
 -- gui menu: don't call onclick method when dragging
@@ -35,7 +38,6 @@ future problems
 -- how much overhead is associated with having all objects in the renderer, but invisible vs being added/removed?
 
 
-load files from XNAT!
 
 
 
