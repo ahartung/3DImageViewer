@@ -1,43 +1,20 @@
 ﻿TODO:
 
-dimensions of files are inconsistent w/ xtk
-some nrrd files: x = dim[2], y = dim[1], z = dim[0]
-other nrrd files: x = dim[0], y = dim[1], z = dim[2]
-other nrrd files: x = dim[2], y = dim[0], z = dim[1]
-
-Google closure (instead of jquery)
--- sliders (opacities, theshold)
--- -- don't want it to drag menu around... stop propagation
--- radio buttons
--- checkboxes
--- all listeners
-
 -- load files from XNAT
 -- -- REST API
-
-small remaining problems
--- loading vol -> vol : scrolling doesn't match right object
--- gui menu: don't call onclick method when dragging
--- load vol, load mesh, vol opacity to 0, mesh is visible, render, opacity to 0, hard to see mesh
--- give the menu boundaries: don't drag out of viewer
--- animated zippy makes an extra div elt
--- shift and move mouse: doesn't update sliders or boxes
-
-misc features
--- make range of threshold slider different color
--- move from html and css into pure js?
--- be able to drag and drop a 2D renderer into a new viewer?
--- Sunil's progress bar?
--- show slice number out of total?
--- be able to change size of 2D planes?
 
 future problems
 -- prompt to replace or merge (ie dropped different patient data, replace?)
 -- add meshes / volumes to same space (same orientation, same origin, same scale)
--- adding multiple objects at once messes with 2D renderers
 -- how much overhead is associated with having all objects in the renderer, but invisible vs being added/removed?
 
 
+
+small problems
+-- radio button deselects on viewer move
+-- opacity slider for volumes doesn't move w/ clicking (threshold does)
+-- scrolling/sliders match direction of Sunil's (ie scroll up always moves thumb to the right)
+-- destroy 3D renderers when 2D is dropped on top or viewer is contracted by a row/col (viewer manager) (to save resources?)
 
 
 

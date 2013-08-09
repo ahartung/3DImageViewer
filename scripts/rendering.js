@@ -26,7 +26,11 @@ function createXObject(file) {
         var dicomFiles = [];
         var numFiles = 160;     // TODO read this in at some point
         for (var i=1; i <= numFiles; ++i) {
-            dicomFiles.push(i);
+            var q;
+            if (i < 10) q = '00' + i;
+            else if (i < 100) q = '0' + i;
+            else q = i;
+            dicomFiles.push(q);
         }
         obj.file = dicomFiles.sort().map(function(obj) {
             return file.slice(0, -4) + obj + ".dcm";
